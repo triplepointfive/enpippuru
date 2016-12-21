@@ -1,0 +1,26 @@
+StackLayout.lessons-list {
+  padding: 10;
+}
+
+StackLayout.lesson {
+  background-color: lightgray;
+  border-radius: 5;
+
+  margin-top: 5;
+  margin-bottom: 5;
+}
+
+Label.lesson-name {
+  margin: 5;
+}
+
+Label.kanji {
+  font-family: "Courier New";
+  vertical-align: center;
+
+  background-color: white;
+  border-radius: 3;
+
+  margin: 2;
+  padding: 2;
+}

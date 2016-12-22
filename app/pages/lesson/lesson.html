@@ -1,4 +1,12 @@
 <StackLayout>
-  <Label [text]="id"></Label>
-  <Label [text]="lesson.name"></Label>
+  <StackLayout class="processed" orientation="horizontal">
+    <template ngFor [ngForOf]="lesson.kanjis" let-kanji>
+      <Label [text]="kanji.name" class="kanji kanji-font kanji-fail"></Label>
+    </template>
+  </StackLayout>
+
+  <Label [text]="lesson.kanjis[0].name" class="current-kanji kanji-font"></Label>
+
+  <TextField [hint]="inputHint()" autocorrect="false" autocapitalizationType="none" class="answer"></TextField>
+
 </StackLayout>

@@ -3,7 +3,7 @@
     <StackLayout orientation="horizontal" class="lesson" (tap)="openLesson(lesson.id)">
       <Label [text]="lesson.name" class="h1 lesson-name"></Label>
       <template ngFor [ngForOf]="lesson.kanjis" let-kanji>
-        <Label [text]="kanji.name" class="h1 kanji"></Label>
+        <Label [text]="kanji.name" class="h1 kanji kanji-font"></Label>
       </template>
     </StackLayout>
   </template>

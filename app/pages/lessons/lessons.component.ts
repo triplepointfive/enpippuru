@@ -5,7 +5,7 @@ import { Lesson } from "../../shared/lesson/lesson";
 import { LessonsService } from "./lessons.service";
 
 @Component({
-  selector: "my-app",
+  selector: "lessons",
   templateUrl: "pages/lessons/lessons.html",
   styleUrls: ["pages/lessons/lessons-common.css", "pages/lessons/lessons.css"],
 })

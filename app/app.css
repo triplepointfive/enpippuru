@@ -18,3 +18,11 @@ of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
 @import 'nativescript-theme-core/css/core.light.css';
+
+TextField {
+  border-width: 1;
+  border-color: black;
+}
+Label.kanji-font {
+  font-family: "Courier New";
+}

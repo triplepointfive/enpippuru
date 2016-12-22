@@ -23,6 +23,11 @@ TextField {
   border-width: 1;
   border-color: black;
 }
+
 Label.kanji-font {
   font-family: "Courier New";
+}
+
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
 }

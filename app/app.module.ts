@@ -4,6 +4,8 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptModule } from "nativescript-angular/platform";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
+import { TNSFontIconModule } from "nativescript-ng2-fonticon";
+
 import { AppComponent } from "./app.component";
 import { routes, navigatableComponents } from "./app.routing";
 
@@ -13,7 +15,11 @@ import { routes, navigatableComponents } from "./app.routing";
     NativeScriptFormsModule,
     NativeScriptHttpModule,
     NativeScriptRouterModule,
-    NativeScriptRouterModule.forRoot(routes)
+    NativeScriptRouterModule.forRoot(routes),
+
+    TNSFontIconModule.forRoot({
+      "fa": "font-awesome.css"
+    })
   ],
   declarations: [
     AppComponent,

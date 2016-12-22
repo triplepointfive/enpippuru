@@ -1,12 +1,25 @@
 <StackLayout>
   <StackLayout class="processed" orientation="horizontal">
-    <template ngFor [ngForOf]="lesson.kanjis" let-kanji>
-      <Label [text]="kanji.name" class="kanji kanji-font kanji-fail"></Label>
+    <template ngFor [ngForOf]="answers" let-answer>
+      <Label
+        [text]="answer.kanji.name"
+        class="kanji kanji-font kanji-fail"
+        ></Label>
     </template>
   </StackLayout>
 
-  <Label [text]="lesson.kanjis[0].name" class="current-kanji kanji-font"></Label>
+  <Label
+    [text]="currentKanji.name"
+    class="current-kanji kanji-font"
+    (tap)="pickUpNewKanji()"
+    ></Label>
 
-  <TextField [hint]="inputHint()" autocorrect="false" autocapitalizationType="none" class="answer"></TextField>
+  <TextField
+    [hint]="inputHint()"
+    autocorrect="false"
+    autocapitalizationType="none"
+    class="answer"
+    [(ngModel)]="input"
+    ></TextField>
 
 </StackLayout>

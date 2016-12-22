@@ -1,6 +1,6 @@
 StackLayout.processed {
-  padding-top: 10;
-  padding-bottom: 10;
+  min-height: 50;
+  padding: 5;
 }
 
 StackLayout.processed Label.kanji {

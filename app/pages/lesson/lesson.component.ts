@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 
 import { Color } from "color";
-import { View } from "ui/core/view";
+import { TextField } from "ui/text-field";
 
 import { Kanji } from "../../shared/kanji/kanji";
 import { AnswerState, Answer } from "../../shared/answer/answer";
@@ -39,10 +39,9 @@ export class LessonComponent {
   }
 
   public giveUp(): void {
-    this.input = "";
     this.answer.giveUp(this.input, this.inputType);
 
-    let answerInput = <View>this.answerInput.nativeElement;
+    let answerInput = <TextField>this.answerInput.nativeElement;
     answerInput.animate({
       backgroundColor: new Color("red"),
       duration: 200
@@ -53,9 +52,7 @@ export class LessonComponent {
 
   public inputUpdate(): void {
     if (this.answer.match(this.input, this.inputType)) {
-      this.input = "";
-
-      let answerInput = <View>this.answerInput.nativeElement;
+      let answerInput = <TextField>this.answerInput.nativeElement;
       answerInput.animate({
         backgroundColor: new Color("green"),
         duration: 200
@@ -75,7 +72,9 @@ export class LessonComponent {
   }
 
   private moveOn(): void {
-    let answerInput = <View>this.answerInput.nativeElement;
+    this.input = "";
+    let answerInput = <TextField>this.answerInput.nativeElement;
+    answerInput.text = "";
     answerInput.animate({
       backgroundColor: new Color("white"),
       duration: 200

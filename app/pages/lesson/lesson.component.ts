@@ -1,6 +1,9 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
+
+import { Color } from "color";
+import { View } from "ui/core/view";
 
 import { Kanji } from "../../shared/kanji/kanji";
 import { AnswerState, Answer } from "../../shared/answer/answer";
@@ -23,6 +26,8 @@ export class LessonComponent {
   private kanjisToProceed: Array<Kanji>;
   private answer: Answer;
 
+  @ViewChild("answerInput") answerInput: ElementRef;
+
   constructor(private router: Router, private route: ActivatedRoute, private lessonsService: LessonsService) {
     this.route.params
       .forEach((params) => { this.id = +params["id"]; });
@@ -34,13 +39,27 @@ export class LessonComponent {
   }
 
   public giveUp(): void {
+    this.input = "";
     this.answer.giveUp(this.input, this.inputType);
-    this.moveOn();
+
+    let answerInput = <View>this.answerInput.nativeElement;
+    answerInput.animate({
+      backgroundColor: new Color("red"),
+      duration: 200
+    }).then(() => this.moveOn());
+
+    answerInput.focus();
   }
 
   public inputUpdate(): void {
     if (this.answer.match(this.input, this.inputType)) {
-      this.moveOn();
+      this.input = "";
+
+      let answerInput = <View>this.answerInput.nativeElement;
+      answerInput.animate({
+        backgroundColor: new Color("green"),
+        duration: 200
+      }).then(() => this.moveOn());
     }
   }
 
@@ -56,6 +75,12 @@ export class LessonComponent {
   }
 
   private moveOn(): void {
+    let answerInput = <View>this.answerInput.nativeElement;
+    answerInput.animate({
+      backgroundColor: new Color("white"),
+      duration: 200
+    });
+
     if (this.answer.done()) {
       this.pickUpNewKanji();
     }
@@ -67,7 +92,6 @@ export class LessonComponent {
         this.answers.push(this.answer);
       }
       this.answer = new Answer(this.kanjisToProceed.shift());
-      this.input = "";
       this.inputType = this.answer.nextInputType();
     } else {
       this.router.navigate(["/"]);

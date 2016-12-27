@@ -54,7 +54,7 @@ export class Answer {
   }
 
   private matchMeaning(input: string): boolean {
-    if (this.kanji.meanings().some((meaning) => meaning === input)) {
+    if (this.kanji.meanings.some((meaning) => meaning === input)) {
       this.markMatched(input, "Meaning");
       return true;
     }

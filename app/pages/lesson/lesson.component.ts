@@ -41,18 +41,17 @@ export class LessonComponent {
   public giveUp(): void {
     this.answer.giveUp(this.input, this.inputType);
 
-    let answerInput = <TextField>this.answerInput.nativeElement;
+    const answerInput = <TextField>this.answerInput.nativeElement;
+    answerInput.isEnabled = false;
     answerInput.animate({
       backgroundColor: new Color("red"),
       duration: 200
     }).then(() => this.moveOn());
-
-    answerInput.focus();
   }
 
   public inputUpdate(): void {
     if (this.answer.match(this.input, this.inputType)) {
-      let answerInput = <TextField>this.answerInput.nativeElement;
+      const answerInput = <TextField>this.answerInput.nativeElement;
       answerInput.animate({
         backgroundColor: new Color("green"),
         duration: 200
@@ -73,12 +72,15 @@ export class LessonComponent {
 
   private moveOn(): void {
     this.input = "";
-    let answerInput = <TextField>this.answerInput.nativeElement;
+
+    const answerInput = <TextField>this.answerInput.nativeElement;
+    answerInput.isEnabled = true;
     answerInput.text = "";
     answerInput.animate({
       backgroundColor: new Color("white"),
       duration: 200
     });
+    answerInput.focus();
 
     if (this.answer.done()) {
       this.pickUpNewKanji();

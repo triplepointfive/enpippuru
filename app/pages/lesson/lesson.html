@@ -1,13 +1,14 @@
 <StackLayout>
-
-  <StackLayout class="processed" orientation="horizontal">
-    <template ngFor [ngForOf]="answers" let-answer>
-      <Label
-        [text]="answer.kanji.name"
-        [class]="'kanji kanji-font ' + answerClass(answer)"
-        ></Label>
-    </template>
-  </StackLayout>
+  <ScrollView orientation="horizontal">
+    <StackLayout class="processed" orientation="horizontal">
+      <template ngFor [ngForOf]="answers" let-answer>
+        <Label
+          [text]="answer.kanji.name"
+          [class]="'kanji kanji-font ' + answerClass(answer)"
+          ></Label>
+      </template>
+    </StackLayout>
+  </ScrollView>
 
   <Label
     [text]="answer.kanji.name"

@@ -28,12 +28,11 @@ export class Answer {
 
   public done(): boolean {
     return Object.keys(this.inputs).length
-      === Object.keys(this.kanji.data).length;
+      === this.kanji.inputTypes.length;
   }
 
   public nextInputType(): InputType {
-    return Answer.types
-      .find((inputType) => ((inputType in this.kanji.data) && !(inputType in this.inputs)));
+    return Answer.types.find((inputType) => this.isTypeFree(inputType));
   }
 
   public giveUp(input: string, inputType: InputType): void {
@@ -42,13 +41,42 @@ export class Answer {
   }
 
   public match(input: string, inputType: InputType): boolean {
-    if (input === this.kanji.data[inputType]) {
-      if (!(inputType in this.inputs)) {
-        this.withMatch = true;
-        this.inputs[inputType] = input;
-      }
+    switch (inputType) {
+      case "Meaning":
+        return this.matchMeaning(input);
+      case "Kunyomi":
+        return this.matchKunyomi(input);
+      case "Onyomi":
+        return this.matchOnyomi(input);
+      default:
+        throw `Undefined match type ${inputType}`;
+    }
+  }
+
+  private matchMeaning(input: string): boolean {
+    if (this.kanji.meanings().some((meaning) => meaning === input)) {
+      this.markMatched(input, "Meaning");
       return true;
     }
     return false;
+  }
+
+  private matchKunyomi(input: string): boolean {
+    return false;
+  }
+
+  private matchOnyomi(input: string): boolean {
+    return false;
+  }
+
+  private markMatched(input: string, inputType: InputType): void {
+    if (!(inputType in this.inputs)) {
+      this.withMatch = true;
+      this.inputs[inputType] = input;
+    }
+  }
+
+  private isTypeFree(inputType: InputType): boolean {
+    return ((this.kanji.inputTypes.indexOf(inputType) > -1) && !(inputType in this.inputs));
   }
 }
